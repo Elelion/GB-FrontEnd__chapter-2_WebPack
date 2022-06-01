@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "luxon": "^2.4.0",
+    "path": "^0.12.7",
+    "sass-loader": "^13.0.0",
+    "style-loader": "^3.3.1",
+    "webpack-bundle-analyzer": "^4.5.0"
+  },
+  "devDependencies": {
+    "mini-css-extract-plugin": "^2.6.0",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  }
+}

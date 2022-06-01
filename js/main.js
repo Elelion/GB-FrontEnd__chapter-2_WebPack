@@ -5,6 +5,12 @@ import { formatError } from "/js/utils.js";
 import "/js/switcher.js";
 import "/js/timer.js";
 
+// ресурсы
+import bundlerSoundChicken from '../src/assets/sound/chicken.mp3';
+import '../style.css';
+
+/**/
+
 const dateCalcForm = document.getElementById("datecalc");
 const dateCalcResult = document.getElementById("datecalc__result");
 
