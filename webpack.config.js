@@ -1,70 +1,94 @@
 'use strict';
 
+// const { resolve } = require("path");
 const path = require('path');
 
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const SRC = resolve(__dirname, 'node_modules');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+
 module.exports = {
-  entry: path.resolve(__dirname, 'js', 'main.js'),
+    entry: path.resolve(__dirname, 'js', 'main.js'),
 
-  output: {
-    // filename: '[name].js',
+    output: {
+        filename: 'main.js',
+        path: path.resolve(__dirname, 'bundle'),
+        clean: true,
+    },
 
-    // дописать уникальное название хэша к main...js
-    filename: 'main[contenthash].js',
-    path: path.resolve(__dirname, 'bundle'),
-    clean: true,
-  },
+    devtool: 'eval',
 
-  devtool: 'eval',
+    module: {
+        rules: [
+            // css
+            {
+              test: /\.css$/i,
+              use: [MiniCssExtractPlugin.loader, "css-loader"],
+            },
 
-  module: {
-    rules: [
+            // sass
+            {
+              test: /\.s[ac]ss$/i,
+              use: [
+                // Creates `style` nodes from JS strings
+                "style-loader",
+                // Translates CSS into CommonJS
+                "css-loader",
+                // Compiles Sass to CSS
+                "sass-loader",
+              ],
+            },
 
-      // ресурсы
-      {
-        // регулярка для типов файлов
-        test: /\.(png|jpe?g|gif|mp3)$/i,
+            // mp3
+            {
+              test: /\.(mp3)$/i,
+              use: [
+                {
+                  loader: 'file-loader',
+                  options: {
+                    name: 'src/assets/sound/[name].mp3'
+                  }
+                }
+              ],
+            },
 
-        // лоадер для обработки наших правил
-        use: [
+            // mp4
+            {
+               test: /\.(webm|mp4)$/,
+               use: [
+                   {
+                       loader: 'file-loader',
+                       options: {
+                           name: 'src/assets/video/[name].mp3'
+                       }
+                   }
+
+               ]                
+           },
+
+          // pic
           {
-            loader: 'file-loader',
-            options: {
-              name: 'src/assets/sound/chicken.mp3'
-            }
-          }
-        ],
-      },
+            test: /\.(jpg|gif)$/i,
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                    name: 'src/assets/images/[name].[ext]'
+                }
+              }
+            ],
+          },
+        ]
+    },
 
-      // css
-      {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
-      },
+    plugins: [
+        new MiniCssExtractPlugin({
+          filename: '[name].css',
+        }),
 
-      // sass
-      {
-        test: /\.s[ac]ss$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-      }
-    ],
-  },
-
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-    }),
-
-    new HTMLWebpackPlugin({
-      template: path.resolve(__dirname, 'index.html'),
-    }),
-
-    // показывает страничку (автоматом) какой плагин сколько занимает
-    // new BundleAnalyzerPlugin,
-  ],
-
-
-}
+        new HTMLWebpackPlugin({
+          template: path.resolve(__dirname, 'index.html')
+        }),
+    ]   
+};

@@ -2,13 +2,11 @@
 npx serve
 
 Для сборки:
-npm webpack
+npm webpack / npm run build
 
 ---
 
-1. Реализуйте сборку приложения с таймером из прошлого урока, используя webpack.
-2. Настройте загрузку различных ресурсов, в том числе музыкальных файлов.
-3. Оптимизируйте сборку, убедитесь, что в итоговый бандл не попадает неиспользуемый код..
+Задание из методички
 
 ---
 
@@ -25,3 +23,4 @@ npm i sass-loader
 npm i mini-css-extract-plugin
 npm i html-webpack-plugin
 npm i webpack-bundle-analyzer
+npm install sass-loader sass webpack --save-dev
