@@ -59,7 +59,7 @@ startButton.addEventListener('click', (event) => {
     
             if (t.total <= 0) {
                 stopTimer();
-                const endTimer = new Audio('/chicken.mp3');
+                const endTimer = new Audio('./src/assets/sound/chicken.mp3');
                 endTimer.play();
                 startButton.disabled = false;
             }
